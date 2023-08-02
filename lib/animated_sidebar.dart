@@ -1,5 +1,4 @@
-import 'dart:math';
-
+import 'package:collapsable_side_bar/my_body.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_sidebar/animated_sidebar.dart';
 
@@ -14,6 +13,74 @@ class _MyAnimatedSidebarState extends State<MyAnimatedSidebar> {
   int activeTab = 0;
 
   final List<SidebarItem> items = [
+    SidebarItem(
+      icon: Icons.home,
+      text: 'Home',
+    ),
+    SidebarItem(
+      icon: Icons.notifications,
+      text: 'Notifications',
+    ),
+    SidebarItem(
+      icon: Icons.person,
+      text: 'Management',
+      children: [
+        SidebarChildItem(
+          icon: Icons.person,
+          text: 'Users',
+        ),
+        SidebarChildItem(
+          icon: Icons.verified_user,
+          text: 'Roles',
+        ),
+        SidebarChildItem(
+          icon: Icons.key,
+          text: 'Permissions',
+        ),
+      ],
+    ),
+    SidebarItem(
+      icon: Icons.abc,
+      text: 'Integrations',
+    ),
+    SidebarItem(
+      icon: Icons.settings,
+      text: 'Settings',
+    ),
+    SidebarItem(
+      icon: Icons.home,
+      text: 'Home',
+    ),
+    SidebarItem(
+      icon: Icons.notifications,
+      text: 'Notifications',
+    ),
+    SidebarItem(
+      icon: Icons.person,
+      text: 'Management',
+      children: [
+        SidebarChildItem(
+          icon: Icons.person,
+          text: 'Users',
+        ),
+        SidebarChildItem(
+          icon: Icons.verified_user,
+          text: 'Roles',
+        ),
+        SidebarChildItem(
+          icon: Icons.key,
+          text: 'Permissions',
+        ),
+      ],
+    ),
+    SidebarItem(
+      icon: Icons.abc,
+      text: 'Integrations',
+    ),
+    SidebarItem(
+      icon: Icons.settings,
+      text: 'Settings',
+    ),
     SidebarItem(
       icon: Icons.home,
       text: 'Home',
@@ -106,72 +173,8 @@ class _MyAnimatedSidebarState extends State<MyAnimatedSidebar> {
               fontSize: 24, fontWeight: FontWeight.w600, color: Colors.white),
           headerText: ' Example',
         ),
-        Expanded(
-          child: _buildPage(activeTab),
-        ),
+        const Expanded(child: MyBody()),
       ],
-    );
-  }
-
-  //minimal version
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-  //     body: Row(
-  //       children: [
-  //         AnimatedSidebar(
-  //           expanded: MediaQuery.of(context).size.width > 600,
-  //           items: items,
-  //           selectedIndex: activeTab,
-  //           onItemSelected: (index) =>
-  //               setState(() => activeTab = index),
-  //           headerIcon: Icons.ac_unit_sharp,
-  //           headerIconColor: Colors.amberAccent,
-  //           headerText: 'Example',
-  //         ),
-  //         Center(
-  //           child: Text(
-  //             'Page: $activeTab',
-  //             style: Theme.of(context).textTheme.headline3,
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  Widget _buildPage(int idx) {
-    // return a page full of skeleton cards
-    return Wrap(
-      children: List.generate(8, (index) {
-        double width = idx % 2 == 0 ? double.infinity : 500;
-        int count = Random().nextInt(2) + 3;
-        return Container(
-            margin: const EdgeInsets.fromLTRB(24, 24, 24, 0),
-            width: width,
-            height: 250,
-            decoration: BoxDecoration(
-              color: Colors.grey.withOpacity(0.3),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            // create a skeleton card
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                for (int i = 0; i < count; i++)
-                  Container(
-                    width: Random().nextInt(100).toDouble() + 200,
-                    height: i == 0 ? 30 : 20,
-                    margin: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(0.3),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-              ],
-            ));
-      }),
     );
   }
 }
